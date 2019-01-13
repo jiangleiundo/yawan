@@ -1,0 +1,162 @@
+<!-- 左侧导航 -->
+<div class="col-md-2 left-sidebar">
+    <nav class="main-nav">
+        <ul class="main-menu" id="mainMenu">
+            <li class="" style="display: block">
+                <a class="" ui-sref="content">
+                    <i class="fa fa-home"></i>
+                    <span class="text">首页</span>
+                </a>
+            </li>
+
+            <li class="active" id="nav_1">
+                <a class="js-sub-menu-toggle">
+                    <i class="fa fa-user-secret"></i>
+                    <span class="text">管理员管理</span>
+                    <i class="toggle-icon fa fa-angle-down"></i>
+                </a>
+                <ul class="sub-menu">
+                    <li class="secPermission" id="secPerm_101">
+                        <a ui-sref="admin"><span class="text">管理员列表</span></a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="active" id="nav_2">
+                <a class="js-sub-menu-toggle">
+                    <i class="fa fa-users"></i>
+                    <span class="text">用户管理</span>
+                    <i class="toggle-icon fa fa-angle-down"></i>
+                </a>
+                <ul class="sub-menu">
+                    <li class="secPermission" id="secPerm_201">
+                        <a ui-sref="user"><span class="text">用户列表</span></a>
+                    </li>
+                </ul>
+
+            </li>
+
+            <li class="active" id="nav_3">
+                <a class="js-sub-menu-toggle">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span class="text">藏品管理</span>
+                    <i class="toggle-icon fa fa-angle-down"></i>
+                </a>
+                <ul class="sub-menu">
+                    <li class="secPermission" id="secPerm_301">
+                        <a ui-sref="goods"><span class="text">藏品列表</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="active" id="nav_4">
+                <a class="js-sub-menu-toggle">
+                    <i class="fa fa-legal"></i>
+                    <span class="text">拍卖管理</span>
+                    <i class="toggle-icon fa fa-angle-down"></i>
+                </a>
+                <ul class="sub-menu">
+                    <li class="secPermission" id="secPerm_401">
+                        <a ui-sref="auction"><span class="text">拍卖列表</span></a>
+                    </li>
+                </ul>
+
+            </li>
+        </ul>
+    </nav>
+    <div class="sidebar-mini-box js-toggle-mini-box">
+        <i class="fa fa-angle-left"></i>
+    </div>
+</div>
+
+<script charset="utf-8">
+    // toggle function
+    $.fn.clickToggle = function(f1, f2) {
+        return this.each(function() {
+            var clicked = false;
+
+            $(this).on('click', function() {
+                if(clicked)
+                {
+                    clicked = false;
+                    return f2.apply(this, arguments);
+                }
+                else
+                {
+                    clicked = true;
+                    return f1.apply(this, arguments);
+                }
+            });
+        });
+    };
+
+    $('.main-menu a.js-sub-menu-toggle').unbind().on("click", function(e) {
+
+        e.preventDefault();
+
+        var $li = $(this).parent('li'),
+            toggleClass = ($(this).next("ul").css("display") == "none")? "toggle-icon fa fa-angle-left" : "toggle-icon fa fa-angle-down";
+
+        $li.find(' > a .toggle-icon').attr("class", toggleClass);
+        $li.removeClass('active').siblings("li").addClass("active");
+        $li.find('.sub-menu').slideToggle(200);
+        $li.siblings("li").find(".sub-menu").slideUp(200);
+        $li.siblings("li").find(' > a .toggle-icon').attr("class", 'toggle-icon fa fa-angle-down');
+    });
+
+    //缩小列表
+    $('.js-toggle-mini-box').clickToggle(
+        function() {
+            $('.left-sidebar').addClass('mini-box');
+            $(".con-parent").addClass("box-double");
+            $("#mainMenu").find(".sub-menu").css({'display': 'none', 'overflow': 'hidden'});
+
+            $('.main-menu > li > a > span.text').animate({
+                opacity: 0
+            }, 300);
+
+            $('.sidebar-mini-box').find('i.fa-angle-left').toggleClass('fa-angle-right');
+        },
+        function() {
+            $('.left-sidebar').removeClass('mini-box');
+            $(".con-parent").removeClass("box-double");
+            $('.main-menu > li > a > span.text').animate({
+                opacity: 1
+            }, 600);
+
+            $('.sidebar-mini-box').find('i.fa-angle-left').toggleClass('fa-angle-right');
+        }
+    );
+
+    setPermission();
+
+    function setPermission() {
+        var userInfo = JSON.parse(localStorage.getItem(strKey.K_USER_INFO)),
+            adminEntries = userInfo.entries;
+
+        if(adminEntries.length == 0)
+        {
+            var permissionArrCopy = commonFn.getAdminPermissions();
+
+            for(var i in permissionArrCopy){
+                if(permissionArrCopy.hasOwnProperty(i))
+                {
+                    $("#nav_" + permissionArrCopy[i].id).fadeIn();
+                }
+            }
+
+            $(".secPermission").fadeIn();
+        }
+        else
+        {
+            for(var n = 0; n < adminEntries.length; n++)
+            {
+                $("#nav_"+adminEntries[n]["entryId"]).fadeIn();
+
+                for(var k = 0;k < adminEntries[n]["children"].length; k++)
+                {
+                    $("#secPerm_"+adminEntries[n]["children"][k]["entryId"]).fadeIn();
+                }
+            }
+        }
+    }
+</script>

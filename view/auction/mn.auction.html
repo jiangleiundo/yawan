@@ -1,0 +1,57 @@
+<div ng-show="!auctionModel.isShowInfo">
+    <div class="mn-header fix">
+        <div class="f"><i class="fa fa-th m-color-0"></i><span>竞拍藏品列表</span></div>
+        <div class="r m-g-l-10"><a class="btn btn-danger" ng-click="delAuctions()"><i class="ti-trash"></i>删除</a></div>
+        <div class="r"><a class="btn btn-default" ng-click="addAuction()"><i class="ti-plus"></i>发布展品</a></div>
+    </div>
+
+    <div class="table-container">
+        <table class="table">
+            <thead>
+            <tr>
+                <td>序号</td>
+                <td>藏品图片</td>
+                <td>藏品名</td>
+                <td>当前价格</td>
+                <td>初始价格</td>
+                <td>最低加价</td>
+                <td>参考价</td>
+                <td>保证金</td>
+                <td>上拍时间</td>
+                <td>截拍时间</td>
+                <td>竞拍次数</td>
+                <td>状态</td>
+                <td>竞拍记录</td>
+                <td>操作</td>
+                <td><div class="all-sel-txt">全选</div><span ng-click="allSel()" ng-class="{true: 'has-sel', false: 'un-sel'}[auctionModel.selectAll]"></span></td>
+            </tr>
+            </thead>
+            <tbody id="tBodyAuction">
+            <tr ng-repeat="item in auctionModel.modelArr">
+                <td>{{$index + 1 + (page.currentPage - 1)*page.selectPageNum}}</td>
+                <td><img ng-if="item.pic" ng-src="{{item.pic}}" ng-click="checkImg()"></td>
+                <td>{{item.goodsInfo.goods_name}}</td>
+                <td>{{item.currentPrice}}</td>
+                <td>{{item.initialPrice}}</td>
+                <td>{{item.lowestPremium}}</td>
+                <td>{{item.referencePrice}}</td>
+                <td>{{item.margin}}</td>
+                <td>{{item.startTime*1000 | date: 'yyyy-MM-dd HH:mm'}}</td>
+                <td>{{item.endTime*1000 | date: 'yyyy-MM-dd HH:mm'}}</td>
+                <td>{{item.bidsNum}}</td>
+                <td>{{item.type}}</td>
+                <td><span class="btn-check user-sel-none" ng-click="checkBiddingList(item.id, item.bidsNum)">查看记录</span></td>
+                <td>
+                    <a class="btn btn-default" ng-show="item.status == 1 && item.bidsNum == 0" ng-click="modAuctionGoods(item.id)">修改</a>
+                    <a class="btn btn-warning" ng-show="item.status == 0" ng-click="offShelves(item.id)">下架</a>
+                </td>
+                <td><span ng-click="oneSel(item.id)" ng-class="{true: 'has-sel', false: 'un-sel'}[item.selected]"></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div ng-include="'modules/page/page.html'"></div>
+</div>
+
+<div ng-include="'view/auction/modal.html'" ng-show="auctionModel.isShowInfo"></div>

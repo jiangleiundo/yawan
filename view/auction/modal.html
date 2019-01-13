@@ -1,0 +1,73 @@
+<div class="mn-header fix">
+    <div class="f"><i class="fa fa-th m-color-0"></i><span>{{auctionModel.modalTitle}}</span></div>
+    <div class="r"><a class="btn btn-white" ng-click="back2main()"><i class="ti-back-left"></i>返回</a></div>
+</div>
+
+<div class="common-container">
+    <h3>藏品详情</h3>
+    <div class="con-item fix">
+        <span class="f">选择藏品：</span>
+        <div class="f" style="line-height: 36px" ng-show="!auctionModel.isAdd">{{auctionModel.goodsName}}</div>
+        <div class="f sel-goods-box"  ng-show="auctionModel.isAdd">
+            <input type="text" class="form-control" ng-click="checkGoodsBox()" readonly="readonly" ng-model="auctionModel.goodsName" placeholder="点击选择商品">
+            <div class="goods-picker">
+                <div class="goods-picker-head fix">
+                    <span class="f">选择藏品</span>
+                    <i class="ti-close r" ng-click="closeGoodsBox()"></i>
+                </div>
+                <div class="goods-search fix">
+                    <div class="f m-g-l-10"><input type="text" class="form-control" ng-model="auctionModel.keyWords" placeholder="输入藏品名搜索"></div>
+                    <a class="f btn btn-default" ng-click="searchGoods()">搜索</a>
+                </div>
+                <div class="scroll-box">
+                    <table class="table">
+                        <thead><tr>
+                            <td>序号</td>
+                            <td>藏品名称</td>
+                            <td>藏品图片</td>
+                        </tr></thead>
+                        <tbody>
+                        <tr ng-repeat="item in auctionModel.allGoodsArr">
+                            <td>{{$index + 1}}</td>
+                            <td><span class="btn-check user-sel-none" ng-click="selCurGoods(item)">{{item.name}}</span></td>
+                            <td><img style="height: 40px;" ng-src="{{item.pic}}"  ng-click="selCurGoods(item)"></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="simplePage" class="simplePage user-sel-none"></div>
+            </div>
+        </div>
+    </div>
+    <div class="con-item fix">
+        <span class="f">上拍时间：</span>
+        <div class="f"><input class="form-control wicon" type="text" id="startTime" placeholder="选择开始时间" readonly/></div>
+    </div>
+    <div class="con-item fix">
+        <span class="f">截拍时间：</span>
+        <div class="f"><input class="form-control wicon" type="text" id="endTime" placeholder="选择结束时间" readonly/></div>
+    </div>
+    <div class="con-item fix">
+        <span class="f">初始价格：</span>
+        <div class="f"><input type="number" class="form-control" ng-model="auctionModel.initPrice"></div>
+    </div>
+    <div class="con-item fix">
+        <span class="f">最低加价：</span>
+        <div class="f"><input type="number" class="form-control" ng-model="auctionModel.lowPrice"></div>
+    </div>
+    <div class="con-item fix">
+        <span class="f">参考价：</span>
+        <div class="f"><input type="number" class="form-control" ng-model="auctionModel.referencePrice"></div>
+    </div>
+    <div class="con-item fix">
+        <span class="f">保证金：</span>
+        <div class="f"><input type="number" class="form-control" ng-model="auctionModel.marginPrice"></div>
+    </div>
+
+    <div class="con-item fix">
+        <span class="f"></span>
+        <div class="f"><a class="btn btn-default" ng-click="submitAuction()">上架</a></div>
+    </div>
+</div>

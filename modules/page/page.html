@@ -1,0 +1,15 @@
+<!-- Pagination -->
+<div class="card-box m-t-20">
+    <div class="page-item"><a class="btn btn-default ripple" ng-click="jump()">确定</a></div>
+    <div class="page-input"><input type="number" class="sel-input" ng-model="page.inputPage"/></div>
+    <div class="page-txt">跳到</div>
+    <div class="page-txt">条</div>
+    <div class="page-input"><select class="option" ng-change="changePage()" ng-model="page.selectPageNum" ng-options="x for x in pageNumSelections"></select></div>
+    <div class="page-txt">每页显示</div>
+    <div class="page-txt">共{{page.totalPage}}页</div>
+    <div class="page-txt">第{{page.currentPage}}页</div>
+    <div class="page-item"><a class="btn btn-default ripple" ng-click="last()">尾页</a></div>
+    <div class="page-item"><a class="btn btn-white" ng-click="next()">下一页</a></div>
+    <div class="page-item"><a class="btn btn-white" ng-click="prev()">上一页</a></div>
+    <div class="page-item"><a class="btn btn-default ripple" ng-click="first()">首页</a></div>
+</div>

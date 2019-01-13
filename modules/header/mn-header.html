@@ -1,0 +1,64 @@
+<!-- 头部 -->
+<div class="header fix">
+    <div class="f header-logo"></div>
+	<div class="header-bar f user-sel-none">雅玩之家-拍卖管理系统</div>
+	<div class="header-main r">
+        <div class="header-set user-sel-none">
+            <span>管理员[<span id="adminName"></span>]</span><i class="f ti-settings"></i>
+        </div>
+	</div>
+</div>
+
+<div class="dropDown-menu">
+    <b class="triangle-up"></b>
+	<ul>
+		<li style="border-bottom: 1px solid #bcbcbc;">
+			<i class="drop-icon ti-reload"></i>
+			<a class="drop-txt" id="clearCache">清除缓存</a>
+		</li>
+		<li>
+			<i class="drop-icon ti-power-off"></i>
+			<a class="drop-txt" id="drop-txt">退出登录</a>
+		</li>
+	</ul>
+</div>
+
+<!--头部动画-->
+<script>
+    var $dropDownMenu = $(".dropDown-menu"),
+            $dropTxt = $("#drop-txt"),
+            $clearCache = $("#clearCache"),
+            $adminName = $("#adminName");
+
+    $adminName.text(localStorage.getItem(strKey.K_USER));
+
+    $(".header-set").find("i").on("click",function() {
+
+        if($dropDownMenu.css("display") == "none")
+        {
+            $dropDownMenu.show().addClass("animated fadeInUp");
+        }
+        else
+        {
+            $dropDownMenu.hide().removeClass("animated fadeInUp");
+        }
+    });
+
+    $dropDownMenu.find("a").click(function() {
+
+        $dropDownMenu.hide().removeClass("animated fadeInUp");
+    });
+
+    //退出登录
+    $dropTxt.on("click", function(){
+        location.href = "login.html";
+        localStorage.removeItem(strKey.K_USER_INFO);
+    });
+
+    //清除缓存
+    $clearCache.on("click", function(){
+        $data.httpRequest("post", api.API_CLEAR_CACHE, {}, function(){
+            layer.msg(CN_TIPS.CLEAR_CACHE, {time: 1600, anim: 5});
+        })
+    })
+</script>

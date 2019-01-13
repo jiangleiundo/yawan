@@ -1,0 +1,95 @@
+@charset "utf-8";
+.btn{
+    display: inline-block;
+    padding: 6px 20px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    border: 1px solid transparent;
+}
+
+.btn-white:active {
+    outline: 0;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    background-color: #f9f9f9;
+}
+
+.btn i{
+	float: left;
+	display: block;
+	font-size: 16px;
+    margin-top: 1px;
+	margin-right: 5px;
+}
+
+.btn-default{
+	background-color: #455F71;
+	color: #bcbcbc;
+}
+
+.btn-white{
+	border: 1px solid #eaeaea;
+	background-color: #eee;
+}
+
+.btn-danger{
+	background-color: #B07B67;
+    color: #ddd;
+}
+
+.btn-warning {
+    background-color: #B09067;
+    color: #ddd;
+}
+
+.btn-primary{
+	background-color: #B09067;
+    color: #ddd;
+}
+
+.btn-inverse{
+	background-color: #4c5667;
+    color: #ddd;
+}
+
+.btn-check {
+    text-decoration: underline;
+    color: #455F71;
+    cursor: pointer;
+}
+
+.ripple {
+	position: relative;
+	overflow: hidden
+}
+
+.ripple:after {
+	content: "";
+	background: rgba(255,255,255,0.6);
+	display: block;
+	position: absolute;
+	border-radius: 50%;
+	padding-top: 240%;
+	padding-left: 240%;
+	margin-top: -120%;
+	margin-left: -120%;
+	opacity: 0;
+	transition: all 1s
+}
+
+.ripple:active:after {
+	padding-top: 0;
+	padding-left: 0;
+	margin-top: 0;
+	margin-left: 0;
+	opacity: 1;
+	transition: 0s
+}

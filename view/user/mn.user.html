@@ -1,0 +1,40 @@
+<div ng-show="!userModel.isShowInfo">
+    <div class="mn-header fix">
+        <div class="f"><i class="fa fa-th m-color-0"></i><span>用户列表</span></div>
+    </div>
+
+    <div class="table-search fix">
+        <div class="f input"><input type="text" class="form-control" placeholder="输入用户ID、手机号、昵称查询" ng-model="userModel.keywords"></div>
+        <div class="f m-g-l-10"><a class="btn btn-white" ng-click="searchUser()">查询</a></div>
+    </div>
+
+    <div class="table-container" style="margin-top: 0">
+        <table class="table">
+            <thead><tr>
+                <td>序号</td>
+                <td>昵称</td>
+                <td>头像</td>
+                <td>ID</td>
+                <td>手机</td>
+                <td>注册时间</td>
+                <td>账户余额</td>
+                <td>操作</td>
+            </tr></thead>
+            <tbody><tr ng-repeat="item in userModel.modelArr">
+                <td>{{$index + 1 + (page.currentPage - 1)*page.selectPageNum}}</td>
+                <td>{{item.name}}</td>
+                <td><img ng-if="item.smallIcon" ng-src="item.smallIcon"></td>
+                <td>{{item.userId}}</td>
+                <td>{{item.telephone}}</td>
+                <td>{{item.registerTime | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{item.balance}}</td>
+                <td><a class="btn btn-white" ng-click="checkInfo()">查看</a></td>
+            </tr></tbody>
+        </table>
+    </div>
+
+    <div ng-include="'modules/page/page.html'"></div>
+</div>
+
+<div ng-include="'view/user/modal.html'" ng-show="userModel.isShowInfo"></div>
+<script src="view/user/mn.userCtrl.js"></script>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<title>登录</title>
+		<link rel="stylesheet" href="assets/css/mn.base.css" />
+		<link rel="stylesheet" href="assets/css/mn.login.css" />
+		<link rel="stylesheet" href="assets/css/mn.button.css" />
+	</head>
+	<body style="background-color: #ededed">
+		<div class="bg"></div>
+		<div class="main">
+			<p class="title">雅玩之家-拍卖管理系统</p>
+			<!--form-->
+			<div class="form-container">
+				<!--left-->
+				<div class="f form-lf">
+					<h3 class="form-title">用户登录</h3>
+					<div class="form-group">
+						<i class="un"></i>
+						<input type="text" placeholder="请输入用户名" id="txtUn"/>
+					</div>
+					<p class="err-des errdes-un"> </p>
+					<div class="form-group">
+						<i class="pwd"></i>
+						<input type="password" placeholder="请输入密码" id="txtPwd"/>
+					</div>
+					<p class="err-des errdes-pwd"></p>
+					<div class="rem fix">
+						<div class="rem-lf f"><span class="un-sel"></span></div>
+						<p class="rem-rg">记住密码</p>
+					</div>
+					<div class="login-btn">
+						<a class="btn-item btnlogin ripple" id="btnlogin">登录</a>
+						<div class="btn-item logining">登录中...</div>
+					</div>
+				</div>
+				<!--right-->
+				<div class="r form-rg">
+					<img src="assets/images/login/iphone.png" />
+					<p>雅玩之家</p>
+				</div>
+			</div>
+			<p class="bottom">copyright@ 2018 雅玩之家 版权所有</p>
+		</div>
+	</body>
+
+	<!--libs-->
+	<script src="libs/jquery-3.1.1.min.js"></script>
+    <script src="config/config.js"></script>
+    <script src="service/ajax.js"></script>
+    <script src="common/utility.js"></script>
+	<script src="controller/mn.login.validate.js"></script>
+	<script src="controller/mn.LoginController.js"></script>
+</html>

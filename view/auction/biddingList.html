@@ -1,0 +1,28 @@
+<div class="mn-header fix">
+    <div class="f"><i class="fa fa-th m-color-0"></i><span>竞拍记录</span></div>
+    <div class="r"><a class="btn btn-white" ng-click="back2AuctionList()"><i class="ti-back-left"></i>返回</a></div>
+</div>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>用户名</td>
+                <td>当前价格</td>
+                <td>竞拍时间</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in biddingModel.modelArr">
+                <td>{{$index + 1 + (page.currentPage - 1)*page.selectPageNum}}</td>
+                <td>{{item.userData.name}}</td>
+                <td>{{item.nowPrice}}</td>
+                <td>{{item.createTime*1000 | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div ng-include="'modules/page/page.html'"></div>
+<script src="view/auction/biddingListCtrl.js"></script>

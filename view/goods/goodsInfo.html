@@ -1,0 +1,41 @@
+<div class="mn-header fix">
+    <div class="f"><i class="fa fa-th m-color-0"></i><span>{{goodsModel.modalTitle}}</span></div>
+    <div class="r"><a class="btn btn-white" ng-click="back2GoodsList()"><i class="ti-back-left"></i>返回</a></div>
+</div>
+
+<div class="common-container">
+    <h3>藏品详情</h3>
+    <div class="con-item fix">
+        <span class="f">藏品名称：</span>
+        <div class="f con-title"><input type="text" class="form-control" ng-model="goodsModel.goodsTitle"></div>
+    </div>
+    <div class="con-item fix">
+        <span class="f">藏品图片：</span>
+        <div class="f con-img">
+            <div class="goods-pics-box fix">
+                <div class="goods-img f" ng-repeat="item in goodsModel.goodsPic track by $index">
+                    <i class="fa fa-minus-circle" ng-click="delPic($index)"></i>
+                    <img ng-if="item" ng-src="{{item}}">
+                </div>
+
+                <div class="upload-icon f">
+                    <form method="post" enctype="multipart/form-data" id="Form_1" action=""  class="upload-goods-form">
+                        <i class="ti-plus"></i>
+                        <input  type="file" id="input_1" name="file">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="con-item fix">
+        <span class="f">藏品详情：</span>
+        <div class="f con-editor">
+            <textarea id="myEditor" name="content" style="width: 100%; height:260px;"></textarea>
+        </div>
+    </div>
+
+    <div class="con-item fix">
+        <span class="f">提交数据：</span>
+        <a class="f btn btn-default" ng-click="submitAll()">提&nbsp;&nbsp;交</a>
+    </div>
+</div>

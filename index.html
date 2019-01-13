@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<title>admin</title>
+		<!-- base css-->
+        <link rel="stylesheet" href="assets/css/mn.base.css" />
+
+        <!--modules-->
+        <link rel="stylesheet" href="assets/css/mn.header.css" />
+        <link rel="stylesheet" href="assets/css/mn.nav.css" />
+
+		<!--inter icon-->
+		<link rel="stylesheet" href="assets/css/mn.icons.css" />
+
+		<!--animated-->
+		<link rel="stylesheet" href="assets/css/mn.animated.css" />
+
+		<!--widget-->
+		<link rel="stylesheet" href="assets/css/mn.button.css" />
+		<link rel="stylesheet" href="assets/css/mn.table.css" />
+
+		<!--common-->
+		<link rel="stylesheet" href="assets/css/mn.main.css" />
+        <link rel="stylesheet" href="assets/css/mn.common.css">
+
+		<!--plugIn-->
+		<link rel="stylesheet" href="assets/css/mn.laydate.css" />
+        <link rel="stylesheet" href="plugIn/editor/themes/default/default.css">
+        <link rel="stylesheet" href="plugIn/layer/skin/default/layer.css">
+	</head>
+	<body>
+		<!--header-->
+		<div ng-include="'modules/header/mn-header.html'"></div>
+
+		<!--left-->
+		<div ng-include="'modules/nav/mn-nav.html'" style="margin-top: 60px;"></div>
+
+		<!--right-->
+        <div class="con-parent">
+            <div class="content-wrapper col-md-10" ui-view=""></div>
+        </div>
+	</body>
+
+    <!--libs-->
+    <script src="libs/jquery-3.1.1.min.js"></script>
+    <script src="libs/angular.min.js"></script>
+    <script src="libs/angular-ui-router.js"></script>
+
+    <!--common-->
+    <script src="common/common.js"></script>
+    <script src="common/utility.js"></script>
+    <script src="config/config.js"></script>
+    <script src="service/ajax.js"></script>
+    <script src="modules/page/pageController.js"></script>
+    <script src="modules/page/simplePage.js"></script>
+
+    <!--main-->
+    <script src="controller/app.js"></script>
+    <script src="config/route.js"></script>
+    <script src="directive/directives.js"></script>
+
+    <!--plugIn-->
+    <script src="plugIn/date/mn.date.js"></script>
+    <script src="plugIn/layer/layer.js"></script>
+
+    <!-- 上传图片-->
+    <script src="libs/jquery.form.min.js"></script>
+    <script src="plugIn/upload/upload.js"></script>
+
+    <!--富文本编辑器-->
+    <script charset="utf-8" src="plugIn/editor/kindeditor-all-min.js"></script>
+    <script charset="utf-8" src="plugIn/editor/lang/zh-CN.js"></script>
+    <script charset="utf-8" src="plugIn/editor/editor.js"></script>
+
+    <!-- 藏品管理-->
+    <script src="view/goods/mn.goodsCtrl.js"></script>
+
+    <!-- 拍卖-->
+    <script src="view/auction/mn.auctionCtrl.js"></script>
+</html>

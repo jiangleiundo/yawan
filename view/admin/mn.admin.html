@@ -1,0 +1,79 @@
+<div class="mn-header fix">
+    <div class="f"><i class="fa fa-th m-color-0"></i><span>管理员列表</span></div>
+    <div class="r m-g-l-10"><a class="btn btn-danger" ng-click="delAdmin()"><i class="ti-trash"></i>删除</a></div>
+    <div class="r"><a class="btn btn-default" ng-click="addAdmins()"><i class="ti-plus"></i>添加</a></div>
+</div>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>用户名</td>
+                <td>用户类型</td>
+                <td>最近登录</td>
+                <td>操作</td>
+                <td><div class="all-sel-txt">全选</div><span ng-click="allSel()" ng-class="{true: 'has-sel', false: 'un-sel'}[adminModel.selectAll]"></span></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in adminModel.modelArr">
+                <td>{{$index + 1 + (page.currentPage - 1)*page.selectPageNum}}</td>
+                <td>{{item.accountId}}</td>
+                <td>{{item.super? '超级管理员': '普通管理员'}}</td>
+                <td>{{item.lastLoginTime*1000 | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>
+                    <a class="btn btn-default" ng-click="mod(item)"><i class="ti-pencil-alt"></i>修改</a>
+                    <a class="btn btn-primary" ng-click="modPwd(item)">修改密码</a>
+                </td>
+                <td><span ng-click="oneSel(item.userId)" ng-class="{true: 'has-sel', false: 'un-sel'}[item.selected]"></span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div ng-include="'modules/page/page.html'"></div>
+
+<!-- 修改密码-->
+<div class="layer-box" id="layerBox" style="display: none">
+    <div class="fix" style="margin-bottom: 15px">
+        <div class="f layer-box-title">用户名：</div>
+        <div class="f layer-box-con">{{adminModel.modalInput}}</div>
+    </div>
+    <div class="fix">
+        <div class="f layer-box-title">新密码：</div>
+        <div class="f layer-box-con"><input type="text" class="form-control"  ng-model="adminModel.modalInput2"></div>
+    </div>
+</div>
+
+<!-- 修改&添加管理员-->
+<div class="layer-box" id="layerBox2" style="display: none">
+    <div class="fix">
+        <div class="f layer-box-title">用户名：</div>
+        <div class="f layer-full-input" ng-if="adminModel.isAdd"><input type="text" class="form-control" ng-model="adminModel.modalInput"></div>
+        <div class="f layer-box-con" ng-if="!adminModel.isAdd">{{adminModel.modalInput}}</div>
+    </div>
+    <div class="fix m-g-t-10" ng-if="adminModel.isAdd">
+        <div class="f layer-box-title">密码：</div>
+        <div class="f layer-full-input"><input type="text" class="form-control" ng-model="adminModel.modalInput2"></div>
+    </div>
+    <div class="fix m-g-t-10">
+        <div class="f layer-box-title">管理员类型：</div>
+        <div class="f user-sel-none layer-box-con">
+            <span ng-click="selAdminType(0)"><i ng-class="{true: 'fa fa-dot-circle-o', false: 'fa fa-circle-o'}[adminModel.isSuper]"></i>&nbsp;超级管理员</span>
+            <span ng-click="selAdminType(1)"><i ng-class="{true: 'fa fa-dot-circle-o', false: 'fa fa-circle-o'}[!adminModel.isSuper]"></i>&nbsp;普通管理员</span>
+        </div>
+    </div>
+    <div class="fix m-g-t-10" ng-show="!adminModel.isSuper">
+        <div class="f layer-box-title">管理员权限：</div>
+        <div class="f layer-box-big">
+            <div class="permission-item fix" ng-repeat="item in adminModel.permissions">
+                <div>{{item.val}}</div>
+                <span ng-click="selRight(p)" class="user-sel-none" ng-repeat="p in item.secPermission"><i ng-class="{true: 'fa fa-check-square-o', false: 'fa fa-square-o'}[p.selected]"></i><span>{{p.val}}</span></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="view/admin/mn.adminCtrl.js"></script>
